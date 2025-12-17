@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Híbrido IA + Humano</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #22d3ee;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- Hero Section --- */
+        header {
+            padding: 8rem 0 5rem;
+            text-align: center;
+            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+        }
+
+        .badge {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--accent);
+            padding: 0.5rem 1.2rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin: 1.5rem 0;
+            /* Fallback for browsers that don't support background-clip */
+            color: var(--text-main);
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .hero-text {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* --- Sections --- */
+        section {
+            padding: 6rem 0;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2::before {
+            content: "";
+            width: 40px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* --- Desafíos --- */
+        .challenge-item {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .challenge-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .challenge-item p {
+            color: var(--text-dim);
+        }
+
+        /* --- Arquitectura (Diagrama) --- */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .node {
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+
+        .node-step {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--primary);
+            opacity: 0.6;
+        }
+
+        /* --- Resultados --- */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-pill {
+            background: linear-gradient(135deg, var(--primary-dark), #312e81);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* --- Animación Scroll --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Media Queries for Responsiveness --- */
+        @media (max-width: 768px) {
+            body {
+                line-height: 1.7;
+            }
+
+            header {
+                padding: 6rem 0 4rem;
+            }
+
+            h1 {
+                font-size: clamp(2.2rem, 8vw, 2.8rem);
+            }
+
+            .hero-text {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+
+            .challenge-item {
+                padding: 1.5rem;
+            }
+
+            .node {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            h2 {
+                margin-bottom: 2rem;
+            }
+
+            h2::before {
+                width: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <span class="badge">Arquitectura de Soluciones</span>
+            <h1>Análisis de Calidad Híbrido</h1>
+            <p class="hero-text">Liderazgo en el diseño e implementación de un sistema que integra IA y validación
+                humana para garantizar resultados escalables y precisos.</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="grid reveal">
+            <div class="card">
+                <h3>Problemática</h3>
+                <p>La IA presentaba limitaciones en procesos complejos y validaciones críticas. Era indispensable un
+                    sistema robusto que garantizara la fiabilidad de la información entregada al usuario.</p>
+            </div>
+            <div class="card">
+                <h3>Solución</h3>
+                <p>Un modelo de dos etapas: Eficiencia de IA + Criterio Humano. Un ciclo continuo de retroalimentación
+                    permite corregir desviaciones y elevar la calidad de los resultados.</p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>Desafíos Clave</h2>
+            <div class="challenge-item">
+                <h4>01. Calibración y Control de IA</h4>
+                <p>Optimización iterativa de prompts mediante un circuito donde los ajustes de analistas alimentan
+                    dashboards de calibración, permitiendo mejoras proactivas.</p>
+            </div>
+            <div class="challenge-item">
+                <h4>02. Estructura de Datos Escalable</h4>
+                <p>Migración a una base de datos de filas dinámicas, eliminando la rigidez de las planillas manuales y
+                    asegurando la integridad ante nuevas dimensiones.</p>
+            </div>
+            <div class="challenge-item">
+                <h4>03. Muestreo Representativo</h4>
+                <p>Implementación de enrutamiento inteligente por asesor para eliminar sesgos, garantizando equidad y
+                    precisión en el modelo híbrido.</p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>Arquitectura del Sistema</h2>
+            <div class="flow-container">
+                <div class="node">
+                    <span class="node-step">Paso 1</span>
+                    <strong>Evaluación IA</strong>
+                    <p>Procesamiento automático con prompts optimizados.</p>
+                </div>
+                <div class="arrow">↓</div>
+                <div class="node">
+                    <span class="node-step">Paso 2</span>
+                    <strong>Validación Humana</strong>
+                    <p>Revisión por analistas y corrección de desviaciones.</p>
+                </div>
+                <div class="arrow">↓</div>
+                <div class="node">
+                    <span class="node-step">Paso 3</span>
+                    <strong>Retroalimentación y Datos</strong>
+                    <p>Ajuste del modelo y almacenamiento en repositorio central.</p>
+                </div>
+                <div class="arrow">↓</div>
+                <div class="node">
+                    <span class="node-step">Paso 4</span>
+                    <strong>Feedback y Reporting</strong>
+                    <p>Comunicación a agentes y monitoreo de KPIs mediante dashboards.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>Resultados Impactantes</h2>
+            <div class="results-grid">
+                <div class="result-pill">Consistencia y Confiabilidad</div>
+                <div class="result-pill">Escalabilidad sin Carga Manual</div>
+                <div class="result-pill">Reporting Centralizado KPIs</div>
+                <div class="result-pill">Ciclo de Mejora Continua</div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; © 2025 Sistema Híbrido IA + Humano. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Animación de aparición al hacer scroll
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => scrollObserver.observe(el));
+    </script>
+</body>
+
+</html>
